@@ -57,4 +57,8 @@ public class Moteur extends JPanel  {
     public void actionTic() {
         lePortail.deplace(this.mouvement);
     }
+
+    public boolean estAllume() {
+        return this.mouvement != 0;
+    }
 }

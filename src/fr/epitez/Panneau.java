@@ -1,5 +1,7 @@
 package fr.epitez;
 
+import fr.epitez.Capteur.Capteur;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
