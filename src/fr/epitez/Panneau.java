@@ -22,6 +22,7 @@ public class Panneau extends JPanel implements ActionListener {
     private final Moteur leMoteur;
     private final Capteur capteurDroit;
     private final Capteur capteurGauche;
+    private final Ampoule ampoule;
 
     public Panneau() {
         Panneau lePanneau = this;
@@ -47,8 +48,9 @@ public class Panneau extends JPanel implements ActionListener {
 
         this.lePortail = new Portail( largeurFenetre, hauteurFenetre );
         this.leMoteur = new Moteur( largeurFenetre, hauteurFenetre, lePortail );
-        this.capteurDroit = new Capteur( 10, hauteurFenetre, this.lePortail, this.leMoteur );
-        this.capteurGauche = new Capteur( largeurFenetre-10, hauteurFenetre, this.lePortail, this.leMoteur );
+        this.capteurDroit = new Capteur( 10, hauteurFenetre, this.lePortail );
+        this.capteurGauche = new Capteur( largeurFenetre-10, hauteurFenetre, this.lePortail );
+        this.ampoule = new Ampoule( 10, 10);
 
         addMouseListener( new Panneau.ReflexeSouris() );
         setFocusable( true );
@@ -63,6 +65,7 @@ public class Panneau extends JPanel implements ActionListener {
         leMoteur.paintComponent( g );
         capteurGauche.paintComponent( g );
         capteurDroit.paintComponent( g );
+        ampoule.paintComponent( g );
     }
 
     public Dimension getPreferredSize() {

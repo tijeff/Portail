@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 public class Maison extends JFrame {
 
-    Panneau lEntree = new Panneau();
+    Panneau lEntree = new Panneau(  );
 
     public Maison() {
         InputMap inputMap = lEntree.getInputMap( JPanel.WHEN_IN_FOCUSED_WINDOW );

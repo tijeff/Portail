@@ -2,15 +2,15 @@ package fr.epitez.Capteur;
 
 import java.awt.*;
 
-class EtatCapteurMoteurSurPortail implements EtatCapteur {
-    private EtatCapteurMoteurSurPortail() {
+class EtatCapteurSurPortail implements EtatCapteur {
+    private EtatCapteurSurPortail() {
     }
 
-    private static EtatCapteurMoteurSurPortail INSTANCE = null;
+    private static EtatCapteurSurPortail INSTANCE = null;
 
     static EtatCapteur recupereInstanceUnique() {
         if (INSTANCE == null) {
-            INSTANCE = new EtatCapteurMoteurSurPortail();
+            INSTANCE = new EtatCapteurSurPortail();
         }
         return INSTANCE;
     }
@@ -21,7 +21,7 @@ class EtatCapteurMoteurSurPortail implements EtatCapteur {
         leCapteur.dessineCapteur( g );
 
         if (!leCapteur.detectePortail()) {
-            return EtatCapteurMoteurHorsPortail.recupereInstanceUnique();
+            return EtatCapteurSansPortail.recupereInstanceUnique();
         }
         return this;
     }

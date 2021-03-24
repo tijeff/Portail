@@ -1,6 +1,5 @@
 package fr.epitez.Capteur;
 
-import fr.epitez.Moteur;
 import fr.epitez.Portail;
 
 import javax.swing.*;
@@ -11,17 +10,15 @@ public class Capteur extends JPanel {
     private final int x;
     private final int y;
     private final Portail lePortail;
-    private final Moteur leMoteur;
     private Color couleur;
     private EtatCapteur etat;
 
-    public Capteur(int x, int y, Portail lePortail, Moteur leMoteur) {
+    public Capteur(int x, int y, Portail lePortail) {
         this.x = x;
         this.y = y;
         this.couleur = Color.GRAY;
         this.lePortail = lePortail;
-        this.leMoteur = leMoteur;
-        this.etat = EtatCapteurMoteurArrete.recupereInstanceUnique();
+        this.etat = EtatCapteurInitial.recupereInstanceUnique();
     }
 
     public boolean detectePortail() {
