@@ -1,6 +1,7 @@
 package fr.epitez;
 
 import fr.epitez.Capteur.Capteur;
+import fr.epitez.moteur.Moteur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Panneau extends JPanel implements ActionListener {
+public class Entree extends JPanel implements ActionListener {
 
     static final int largeurFenetre = 500;
     static final int hauteurFenetre = 100;
@@ -23,9 +24,10 @@ public class Panneau extends JPanel implements ActionListener {
     private final Capteur capteurDroit;
     private final Capteur capteurGauche;
     private final Ampoule ampoule;
+    private final Telecommande teleCommande;
 
-    public Panneau() {
-        Panneau lePanneau = this;
+    public Entree() {
+        Entree lePanneau = this;
         ActionListener actionListener = new ActionListener() {
 
             public void actionPerformed(ActionEvent actionEvent) {
@@ -41,18 +43,42 @@ public class Panneau extends JPanel implements ActionListener {
                 lHeure.setText( date );
             }
         };
+
         Timer leTimeur = new Timer( 100, actionListener );
         this.lHeure = new JLabel();
         this.lHeure.setBounds( 0, 0, 200, 50 );
         add( lHeure );
 
-        this.lePortail = new Portail( largeurFenetre, hauteurFenetre );
-        this.leMoteur = new Moteur( largeurFenetre, hauteurFenetre, lePortail );
-        this.capteurDroit = new Capteur( 10, hauteurFenetre, this.lePortail );
-        this.capteurGauche = new Capteur( largeurFenetre-10, hauteurFenetre, this.lePortail );
-        this.ampoule = new Ampoule( 10, 10);
+        final int largeurPortail = largeurFenetre/3;
+        final int hauteurPortail = hauteurFenetre/2;
+        final int positionXPortail = largeurFenetre/2 - largeurPortail;
+        final int positionYPortail = hauteurFenetre-hauteurPortail;
 
-        addMouseListener( new Panneau.ReflexeSouris() );
+        this.lePortail = new Portail( positionXPortail, positionYPortail,  largeurPortail, hauteurPortail);
+
+        final int dimensionMoteur = 15;
+        final int positionXMoteur = largeurFenetre/2;
+        final int positionYMoteur = hauteurFenetre;
+        this.leMoteur = new Moteur( positionXMoteur, positionYMoteur, dimensionMoteur, lePortail );
+
+        final int dimensionCapteur = 15;
+        final int positionXCapteurGauche = positionXMoteur-largeurPortail-dimensionCapteur/2;
+        final int positionXCapteurDroit = positionXMoteur+largeurPortail-dimensionMoteur+dimensionCapteur/2;
+        final int positionYCapteur = hauteurFenetre;
+        this.capteurDroit = new Capteur( positionXCapteurGauche, positionYCapteur, dimensionCapteur, this.lePortail );
+        this.capteurGauche = new Capteur( positionXCapteurDroit, positionYCapteur, dimensionCapteur, this.lePortail );
+
+        final int positionXAmpoule = 10;
+        final int positionYAmpoule = 10;
+        this.ampoule = new Ampoule( positionXAmpoule, positionYAmpoule);
+
+        final int dimensionTelecommande = 10;
+        final int positionXTelecommande = largeurFenetre-dimensionTelecommande;
+        final int positionYTelecommande = 1;
+        this.teleCommande = new Telecommande(positionXTelecommande, positionYTelecommande, dimensionTelecommande,
+                this);
+
+        addMouseListener( new Entree.ReflexeSouris() );
         setFocusable( true );
         leTimeur.start();
     }

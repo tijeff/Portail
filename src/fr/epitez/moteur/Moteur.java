@@ -1,4 +1,6 @@
-package fr.epitez;
+package fr.epitez.moteur;
+
+import fr.epitez.Portail;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,31 +9,24 @@ public class Moteur extends JPanel  {
 
     static final int vitesse = 10;
 
-    final int largeurFenetre;
-    final int hauteurFenetre;
-
     private int x;
     private int y;
+    private int dimension;
     private int mouvement;
 
     private Portail lePortail;
 
-    public Moteur(int largeurFenetre, int hauteurFenetre, Portail lePortail) {
-        this.largeurFenetre = largeurFenetre;
-        this.hauteurFenetre = hauteurFenetre;
-        this.x = this.largeurFenetre/2;
-        this.y = hauteurFenetre-12;
+    public Moteur(int x, int y, int dimension, Portail lePortail) {
+        this.x = x;
+        this.y = y;
+        this.dimension = dimension;
         this.lePortail = lePortail;
     }
 
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent( g );
-        g.setColor( Color.RED );
-        g.fillRect( x, y, 10, 10 );
-    }
-
-    public Dimension getPreferredSize() {
-        return new Dimension( largeurFenetre, hauteurFenetre );
+        g.setColor( Color.BLACK );
+        g.fillRect( x-dimension, y-dimension, dimension, dimension );
     }
 
     public void tourneADroite() {
